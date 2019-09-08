@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const App = () => {
   const SNIPPETS = [
@@ -29,6 +29,10 @@ const App = () => {
     setSnippet(SNIPPETS[snippetIndex]);
     setGameState({ ...gameState, startTime: new Date().getTime() });
   }
+
+  useEffect(() => {
+    if (gameState.victory) document.title = 'Victory!';
+  });
   
   return (
     <div>
