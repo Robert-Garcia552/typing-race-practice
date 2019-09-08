@@ -1,21 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function App() {
+const App = () => {
+  const [text, setUserText] = useState('');
+
+  const updateText = event => {
+    setUserText(event.target.value);
+    console.log('Current text', text);
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Elevate your typing skills!</h1>
+      <input value={text} onChange={updateText}/>
     </div>
   );
 }
