@@ -28,6 +28,7 @@ const App = () => {
   const [gameState, setGameState] = useState(INITIAL_GAME_STATE);
 
   const updateText = event => {
+    setGameState(INITIAL_GAME_STATE)
     setUserText(event.target.value);
 
     if (event.target.value === snippet) {
@@ -40,34 +41,33 @@ const App = () => {
   }
 
   const chooseSnippet = snippetIndex => () => {
-    console.log('setSnippet', snippetIndex);
     setSnippet(SNIPPETS[snippetIndex]);
-    setGameState({ ...gameState, startTime: new Date().getTime() });
+    setGameState({ ...gameState, startTime: new Date().getTime(), victory: false });
   }
 
   useEffect(() => {
-    if (gameState.victory) document.title = 'Victory!';
+    if (gameState.victory) {
+      document.title = 'Victory!';
+    }
   });
   
   return (
-   
-      <div style={center}>
-        <h1>Elevate your typing skills!</h1>
-        <hr />
-        <h3>Snippet</h3>
-        <p>{snippet}</p>
-        <h2>{gameState.victory ? `Done! 🎉 Time: ${gameState.endTime}ms` : null}</h2>
-        <input value={text} onChange={updateText}/>
-        <hr />
-        {
-          SNIPPETS.map((SNIPPET, index) => (
-            <button onClick={chooseSnippet(index)} key={index} style={buttons}>
-              Challenge #{index+1}
-            </button>
-          ))
-        }
-      </div>
-  
+    <div style={center}>
+      <h1>Elevate your typing skills!</h1>
+      <hr />
+      <h3>Snippet</h3>
+      <p>{snippet}</p>
+      <h2>{gameState.victory ? `Done! 🎉 Time: ${gameState.endTime}ms` : null}</h2>
+      <input value={text} onChange={updateText}/>
+      <hr />
+      {
+        SNIPPETS.map((SNIPPET, index) => (
+          <button onClick={chooseSnippet(index)} key={index} style={buttons}>
+            Challenge #{index+1}
+          </button>
+        ))
+      }
+    </div>
   );
 }
 
