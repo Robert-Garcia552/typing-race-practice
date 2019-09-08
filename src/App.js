@@ -49,6 +49,10 @@ const App = () => {
     if (gameState.victory) {
       document.title = 'Victory!';
     }
+
+    if (!gameState.victory) {
+      document.title = 'Typing Challenge'
+    }
   });
   
   return (
